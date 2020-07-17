@@ -52,5 +52,53 @@ VALUES  (NULL, 1, 1),
         (NULL, 1, 2),
         (NULL, 3, 2);
 
+--- SELECT UNIDADES ---
+SELECT * FROM unidad;
+SELECT * FROM unidad WHERE id_unidad=2;
+
+--- SELECT COMPANIAS ---
+SELECT * FROM compania;
+SELECT * FROM compania WHERE id_compania=2;
+
+--- SELECT UBICACION ---
+SELECT * FROM ubicacion;
+SELECT * FROM ubicacion WHERE id_ubicacion=2;
+
+--- SELECT CUARTEL ---
+SELECT cuartel.*, ubicacion.ciudad  
+FROM cuartel
+INNER JOIN ubicacion ON cuartel.ubicacion_id_ubicacion=ubicacion.id_ubicacion;
+
+--- SELECT GRADO ---
+SELECT * FROM grado;
+SELECT * FROM grado WHERE id_grado=2;
+
+--- SELECT SOLDADO ---
+SELECT soldado.codigo, soldado.nombre, soldado.apellido, unidad.nombre, compania.actividad, cuartel.nombre, grado.grado
+FROM soldado
+INNER JOIN unidad ON soldado.unidad_id_unidad=unidad.id_unidad
+INNER JOIN compania ON soldado.compania_id_compania=compania.id_compania
+INNER JOIN cuartel ON soldado.cuartel_id_cuartel=cuartel.id_cuartel
+INNER JOIN grado ON soldado.grado_id_grado=grado.id_grado;
+
+--- SELECT SERVICIO ---
+SELECT * FROM servicio;
+SELECT * FROM servicio WHERE id_servicio=2;
+
+-- SELECT MANY CUARTEL - COMPANIA --
+SELECT compania_has_cuartel.id, compania.actividad, cuartel.nombre 
+FROM compania_has_cuartel
+INNER JOIN compania ON compania_has_cuartel.compania_id_compania=compania.id_compania
+INNER JOIN cuartel ON compania_has_cuartel.cuartel_id_cuartel=cuartel.id_cuartel;
+
+-- SELECT MANY SOLDADO - servicio --
+
+SELECT soldado_has_servicio.id, soldado.nombre, soldado.apellido, servicio.codigo, servicio.nombre 
+FROM soldado_has_servicio
+INNER JOIN soldado ON soldado_has_servicio.soldado_id_soldado=soldado.id_soldado
+INNER JOIN servicio ON soldado_has_servicio.servicio_id_servicio=servicio.id_servicio;
+
+
+
         
 
