@@ -1,6 +1,3 @@
--- Este script no se debe ejecutar, es solo para .github--
-
-
 CREATE DATABASE IF NOT EXISTS universidad;
 USE universidad;
 
@@ -20,3 +17,5 @@ CREATE TABLE IF NOT EXISTS test3 (
   id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
   ciudad VARCHAR(45) NOT NULL
 );
+
+-- Este script no se debe ejecutar, es solo para .github--
