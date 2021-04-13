@@ -28,7 +28,32 @@ INSERT INTO programa VALUES(6, 'INGENIERIA CIVIL');
 INSERT INTO programa VALUES(7, 'MEDICINA');
 INSERT INTO programa VALUES(8, ARTES
 
+
+
+
+
+-- ACTUALIZARUN REGISTRO DE LA TABLA PROGRAMA
+
+CREATE OR REPLACE TRIGGER ACTUALIZAR_PROGRAMA
+    BEFORE UPDATE ON programa
+        FOR EACH ROW 
+            DECLARE 
+                V_USERNAME VARCHAR(50);
+                V_FECHA DATE;
+            BEGIN
+                SELECT USER INTO V_USERNAME FROM DUAL; 
+                SELECT SYSDATE INTO V_FECHA FROM DUAL; 
+                INSERT INTO aud_programa(id, accion, fecha, usuario) VALUES ('U-' || :NEW.id, 'SE HA ACTUALZIADO UN PROGRAMA ' || :NEW.nombre, V_FECHA, V_USERNAME );
+            END;
+
 SELECT * FROM aud_programa;
+
+UPDATE programa SET nombre = 'INGENIERIA DE SISTEMAS Y COMPUTACION' WHERE id = 1;
+
+
+
+
+
 
 -- ELIMINAR UN REGISTRO DE LA TABLA PROGRAMA
 
