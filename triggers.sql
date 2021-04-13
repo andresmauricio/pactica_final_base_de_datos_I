@@ -73,3 +73,33 @@ DELETE FROM programa WHERE id = 6;
 DELETE FROM programa WHERE id = 8;
 
 SELECT * FROM aud_programa;
+
+-- AUDITORIA CURSOS
+
+CREATE TABLE aud_cursos (
+    id             VARCHAR2(256) NOT NULL,
+    accion         VARCHAR2(256) NOT NULL,
+    fecha          DATE,
+    usuario        VARCHAR2(256) NOT NULL
+);
+
+ALTER TABLE aud_cursos ADD CONSTRAINT aud_cursos_pk PRIMARY KEY ( id );
+
+CREATE OR REPLACE TRIGGER INSERTAR_CURSOS
+    AFTER INSERT ON cursos
+        FOR EACH ROW 
+            DECLARE 
+                V_USERNAME VARCHAR(50);
+                V_FECHA DATE;
+            BEGIN
+                SELECT USER INTO V_USERNAME FROM DUAL; 
+                SELECT SYSDATE INTO V_FECHA FROM DUAL; 
+                INSERT INTO aud_cursos(id, accion, fecha, usuario) VALUES ('ID-' || :NEW.id, 'SE HA CREADO UN CURSO ' || :NEW.nombre, V_FECHA, V_USERNAME );
+            END;
+
+INSERT INTO cursos  VALUES(5, 'BASES DE DATOS II');
+INSERT INTO cursos  VALUES(6, 'CALCULO INTEGRAL');
+INSERT INTO cursos  VALUES(7, 'METODOS NUMERICOS');
+INSERT INTO cursos  VALUES(8, 'ESTADISTICA DESCRIPTIVA');
+
+SELECT * FROM aud_cursos;
