@@ -57,10 +57,7 @@ CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_SALARIO_DIARIO"
     || salario);
     END;
 
-
-
-
---- psd 3 
+--- TERCER PROCEDIMIENTO ALMACENADO - CALCULAR SALARIO DE UN EMPLEADO CON DEDUCCIONES DEL %
 
 CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_SALARIO_NETO_MENSUAL"
     AS
@@ -81,30 +78,39 @@ CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_SALARIO_NETO_MENSUAL"
     || salario);
     END;
 
+
 EXECUTE CALCULAR_SALARIO_NETO_MENSUAL;
 
 
--- psd 4 
+-- CUARTO PROCEDIMIENTO ALMACENADO CALCULAR NOMINA MENSUAL DE LOS EMPLEADOS
 
 select * from nomina;
 
-
-CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_NOMINA_MENSUAL"
+CREATE OR REPLACE PROCEDURE “UNAD_NAL_25”.”CALCULAR_NOMINA_MENSUAL”
     AS
         cantidad_mensual INT;
-		salario INT;
+        salario INT;
     BEGIN 
         SELECT SUM(salario) INTO salario from nomina;
-    	cantidad_mensual := salario;
-    	dbms_output.Put_line ('LA SUMA MENSUAL DE LA NOMINA ES DE  -> ' || cantidad_mensual);
+        cantidad_mensual := salario;
+        dbms_output.Put_line (‘LA SUMA MENSUAL DE LA NOMINA ES DE  -> ‘ || cantidad_mensual);
     END;
 
 EXECUTE CALCULAR_NOMINA_MENSUAL;
 
--- psd 5
+-- QUINTO PROCEDIMIENTO ALMACENADO CALCULAR EL VALOR ANUAL A PAGAR POR TODOS LOS EMPLEADOS
 
+CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_NOMINA_ANUAL"
+    AS
+        cantidad_anual INT;
+        salario INT;
+    BEGIN 
+        SELECT SUM(salario) INTO salario from nomina;
+        cantidad_anual := salario*12;
+        dbms_output.Put_line ('LA SUMA MENSUAL DE LA NOMINA ES DE  -> ' || cantidad_anual);
+    END;
 
-
+EXECUTE CALCULAR_NOMINA_ANUAL;
 
 
 
