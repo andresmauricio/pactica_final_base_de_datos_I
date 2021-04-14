@@ -1,6 +1,6 @@
---- psd 1
-
 select * from nomina;
+
+--- PRIMER PROCEDIMIENTO ALMACENADO - CALCULAR SALARIO DE UN EMPLEADO
 
 CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_SALARIO"
     AS
@@ -30,7 +30,34 @@ CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_SALARIO"
 EXECUTE CALCULAR_SALARIO;
 
 
---- psd 2
+-- SEGUNDO PROCEDIMIENTO ALMACENADO - CALCULAR SALARIO DIARIO DE UN EMPLEADO
+
+CREATE OR REPLACE PROCEDURE "UNAD_NAL_25"."CALCULAR_SALARIO_DIARIO"
+    AS
+        salario  INT;
+        nombre   VARCHAR (30);
+        apellido VARCHAR (30);
+    BEGIN
+        SELECT salario, nombre, apellido
+        INTO   salario,  nombre, apellido
+        FROM   nomina
+        WHERE nombre='Steven';
+    dbms_output.Put_line ('EL SALARIO DE '
+    || nombre
+    || ' '
+    || apellido
+    || ' -> '
+    || salario);
+    salario := salario/30;
+    dbms_output.Put_line ('EL SALARIO DIARIO ES DE '
+    || nombre
+    ||' '
+    || apellido
+    || ' -> '
+    || salario);
+    END;
+
+
 
 
 --- psd 3 
