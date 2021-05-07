@@ -22,3 +22,13 @@ CREATE TABLESPACE CENTRO
 DATAFILE 'C:\oraclexe\app\oracle\product\11.2.0\server\database\CENTRO.DBF'
 SIZE 1M AUTOEXTEND ON NEXT 100K MAXSIZE 1100K 
 DEFAULT STORAGE (INITIAL 16K NEXT 16K MINEXTENTS 1 MAXEXTENTS 3);
+
+--  Roles DBA
+
+SELECT * FROM dba_profiles;
+SELECT * FROM dba_roles;
+SELECT * FROM dba_users;
+SELECT * FROM dba_role_privs;
+SELECT * FROM dba_tab_privs;
+SELECT * FROM dba_sys_privs;
+
